@@ -1,11 +1,11 @@
 <script lang="ts">
-  // IndexedDBのデータベース名とストア名を定義
+  // IndexedDB分度ー塔贝ー定义储存名称和储存名称
   const dbName = 'fontHistoryDB';
   const storeName = 'fontHistory';
 
   let db;
 
-  // IndexedDBを開く
+  // IndexedDB的双曲正切值
   const openRequest = indexedDB.open(dbName, 1);
 
   openRequest.onupgradeneeded = (event) => {

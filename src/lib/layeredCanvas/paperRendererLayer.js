@@ -11,13 +11,13 @@ export class PaperRendererLayer extends Layer {
 
     this.rawBubbles = [];
 
-    // leafでないframeのバックグラウンド(単色)
-    this.backgrounds = []; // [{layout, inheritanceContext}] leafは含まない
+    // leaf不是，不是frame背景(单色)
+    this.backgrounds = []; // [{layout, inheritanceContext}] leaf不包含
 
-    // leafの背景(単色)、画像、embedフキダシ、枠線
+    // leaf背景(单色)图像、embed边框
     this.foregrounds = []; // [{layout, inheritanceContext, embeddedBubbles:[bubble]}]
 
-    // leafに属さないフキダシ
+    // leaf不属于
     this.floatingBubbles = [];
   }
 
@@ -99,8 +99,8 @@ export class PaperRendererLayer extends Layer {
   }
 
   resolveLinkages(bubbles) {
-    // 親子関係解決
-    // ちょっとお行儀が悪く、path, unitedPath, childrenを書き換えている
+    // 解决父子关系
+    // 有点失礼path, unitedPath, children正在修改
     const bubbleDic = {};
     for (let bubble of bubbles) {
       bubble.unitedPath = null;
@@ -114,7 +114,7 @@ export class PaperRendererLayer extends Layer {
       }
     }
 
-    // パス作成
+    // 道路建设
     for (let bubble of bubbles) {
       const c = {
         shape: bubble.shape,
@@ -126,7 +126,7 @@ export class PaperRendererLayer extends Layer {
       const json = JSON.stringify(c);
       // console.log(`${c} took ${performance.now() - startTime} ms, ${json.length} bytes`);
       if (bubble.pathJson != json) {
-        // 変更が起きたときのみ
+        // 只当再変更发生时
         // const startTime = performance.now();
         bubble.pathJson = json;
         bubble.path = getPath(bubble.shape, bubble.size, bubble.optionContext, bubble.text);
@@ -135,7 +135,7 @@ export class PaperRendererLayer extends Layer {
     }
     }
 
-    // 結合
+    // 连接
     for (let bubble of bubbles) {
       if (bubble.parent) {
         bubble.unitedPath = null;
@@ -219,17 +219,17 @@ export class PaperRendererLayer extends Layer {
     ctx.translate(...bubble.center);
     ctx.rotate((-bubble.rotation * Math.PI) / 180);
 
-    // fill/stroke設定
+    // fill/stroke对齐方式
     ctx.fillStyle = bubble.hasEnoughSize() ? bubble.fillColor : "rgba(255, 128, 0, 0.9)";;
     ctx.strokeStyle = 0 < bubble.strokeWidth ? bubble.strokeColor : "rgba(0, 0, 0, 0)";
     ctx.lineWidth = bubble.strokeWidth;
 
-    // shape背景描画
-    ctx.bubbleDrawMethod = 'fill'; // 行儀が悪い
+    // shape背景画
+    ctx.bubbleDrawMethod = 'fill'; // 没礼貌
     this.drawBubble(ctx, size, 'fill', bubble);
     this.drawBubble(ctx, size, 'clip', bubble);
 
-    // 画像描画
+    // 绘图
     if (bubble.image) {
       const [w,h] = size;
       const img = bubble.image;
@@ -253,13 +253,13 @@ export class PaperRendererLayer extends Layer {
     ctx.save();
     this.drawBubble(ctx, size, 'clip', bubble);
 
-    // テキスト描画
+    // 文学绘图
     if (bubble.text) {
       this.drawText(ctx, bubble);
     }
     ctx.restore();
 
-    // shape枠描画
+    // shape框画
     ctx.strokeStyle = 0 < bubble.strokeWidth ? bubble.strokeColor : "rgba(0, 0, 0, 0)";
     ctx.lineWidth = bubble.strokeWidth;
     this.drawBubble(ctx, size, 'stroke', bubble);
@@ -268,7 +268,7 @@ export class PaperRendererLayer extends Layer {
   }
 
   drawBubble(ctx, size, method, bubble) {
-    ctx.bubbleDrawMethod = method; // 行儀が悪い
+    ctx.bubbleDrawMethod = method; // 没礼貌
     if (bubble.unitedPath) {
       drawPath(ctx, bubble.unitedPath);
     } else if (!bubble.parent) {
@@ -317,7 +317,7 @@ export class PaperRendererLayer extends Layer {
     const baselineSkip = bubble.fontSize * 1.5;
     const charSkip = bubble.fontSize;
 
-    // TODO: キャッシュにつかえる
+    // TODO: 存入现金
     if (!bubble.tmpCanvas) {
       bubble.tmpCanvas = document.createElement('canvas');
       //bubble.tmpCanvas = document.getElementById('tmpCanvas');
@@ -329,7 +329,7 @@ export class PaperRendererLayer extends Layer {
 
     const dpr = window.devicePixelRatio;
     const [pw, ph] = [Math.floor(w * dpr), Math.floor(h * dpr)];
-    if (pw <= 0 || ph <= 0) { return; } // ブラウザ解像度などで実質サイズが0になることがあるらしい
+    if (pw <= 0 || ph <= 0) { return; } // 阅覧器分辨率等実际サイズ0会变成这样
     canvas.width = pw;
     canvas.height = ph;
 
@@ -338,18 +338,18 @@ export class PaperRendererLayer extends Layer {
     ctx.translate(...bubble.offset);
 
     const ss = `${bubble.fontStyle} ${bubble.fontWeight} ${bubble.fontSize}px '${bubble.fontFamily}'`;
-    ctx.font = ss; // horizontal measureより先にないとだめ
+    ctx.font = ss; // horizontal measure不在前面不行
 
     const m = measureText(bubble.direction, ctx, w * 0.85, h * 0.85, bubble.text, baselineSkip, charSkip, bubble.autoNewline);
     const [tw, th] = [m.width, m.height];
     const r = { x: - tw * 0.5, y: - th * 0.5, width: tw, height: th };
 
-    // 本体
+    // 主体
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = bubble.fontColor;
     drawText(bubble.direction, ctx, 'fill', r, bubble.text, baselineSkip, charSkip, m, bubble.autoNewline);
 
-    // フチ
+    // 钳口
     if (0 < bubble.outlineWidth) {
       ctx.globalCompositeOperation = 'destination-over';
       ctx.strokeStyle = bubble.outlineColor;
@@ -359,7 +359,7 @@ export class PaperRendererLayer extends Layer {
       drawText(bubble.direction, ctx, 'stroke', r, bubble.text, baselineSkip, charSkip, m, bubble.autoNewline);
     }
 
-    // 描き戻し
+    // 重绘
     try {
       targetCtx.drawImage(canvas, 0 - w * 0.5, 0 - h * 0.5, ...bubble.size);
     }

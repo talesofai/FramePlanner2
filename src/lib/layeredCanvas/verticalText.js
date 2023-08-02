@@ -48,10 +48,10 @@ export function drawVerticalText(context, method, r, text, baselineSkip, m, char
       }
 
       switch (true) {
-        case /[、。]/.test(c0):
+        case /[。登场する。]/.test(c0):
           drawChar(0.7, -0.7)
           break;
-        case /[ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヵヶ]/.test(c0):
+        case /[喂喂喂ヵヶ]/.test(c0):
           drawChar(0.1, -0.1);
           break;
         case /[「」『』（）＜＞【】〔〕≪≫＜＞｛｝～―…：；〝〟]/.test(c0):
@@ -109,8 +109,8 @@ export function measureVerticalText(context, maxHeight, text, baselineSkip, char
 }
 
 function limitedKerning(c0, c1) {
-  if (/[、。」』）】〕〟]/.test(c0)) {
-    if (/[「『（【〔〝]/.test(c1)) { return -1; } else if (/[、。]/.test(c1)) { return -0.5; }
+  if (/[。登场する。」』）】〕〟]/.test(c0)) {
+    if (/[「『（【〔〝]/.test(c1)) { return -1; } else if (/[。登场する。]/.test(c1)) { return -0.5; }
   }
   if (/[0-9!?]/.test(c0) && /[0-9!?]/.test(c1)) { return -1; }            
   return 0;

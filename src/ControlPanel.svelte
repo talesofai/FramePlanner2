@@ -40,7 +40,7 @@
 
   function copyToClipboard() {
     $clipboardToken = true;
-    toastStore.trigger({ message: 'クリップボードにコピーしました', timeout: 1500});
+    toastStore.trigger({ message: '钻孔机ー复制到ー我做了', timeout: 1500});
 
   }
 
@@ -71,7 +71,7 @@
         $paperTemplate = { frameTree: {}, bubbles: [] };
         await tick();
         $importingImage = image;
-        URL.revokeObjectURL(imageURL); // オブジェクトURLのリソースを解放
+        URL.revokeObjectURL(imageURL); // 对象URL利索ー释放
       } else if (file.type.startsWith("text/") || file.type.startsWith("application/json")) {
         const text = await readFileAsText(file);
         $paperTemplate = JSON.parse(text);
@@ -111,14 +111,14 @@
   async function contact() {
     console.log(contactText);
     if (contactText == null || contactText == "") {
-      toastStore.trigger({ message: '要望を入力してください', timeout: 1500});
+      toastStore.trigger({ message: '请输入要求', timeout: 1500});
       return;
     }
     if (contactText === "throw error") {
       throw new Error("intentional error");
     }
     await postContact(contactText);
-    toastStore.trigger({ message: '要望を投稿しました', timeout: 1500});
+    toastStore.trigger({ message: '已提交请求', timeout: 1500});
     contactText = null;
   }
 
@@ -175,26 +175,26 @@
     </div>
   </div>
   <div class="hbox gap mx-2 paper-color-picker" style="margin-top: 16px;">
-    背景色<ColorPicker bind:hex={$paperColor} label=""/>
-    枠色<ColorPicker bind:hex={$frameColor} label="" />
-    幅<RangeSlider name="line" bind:value={$frameWidth} max={10} step={1} style="width:100px;"/>
+    背景颜色<ColorPicker bind:hex={$paperColor} label=""/>
+    边框颜色<ColorPicker bind:hex={$frameColor} label="" />
+    宽度<RangeSlider name="line" bind:value={$frameWidth} max={10} step={1} style="width:100px;"/>
 </div>
   <div class="hbox gap mx-2" style="margin-top: 16px;">
     <FileDropzone name="upload-file" accept="image/*" on:dragover={onDragOver} on:drop={onDrop} bind:files={files}>
-    	<svelte:fragment slot="message">ここにpngをドロップすると一枚絵の用紙を作ります</svelte:fragment>
+    	<svelte:fragment slot="message">在这里png你把它放下来，然后做一张画纸</svelte:fragment>
     </FileDropzone> 
   </div>  
   <div class="hbox gap" style="margin-top: 16px;">
     <button class="bg-primary-500 text-white hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-900 download-button hbox" on:click={save}>
-      <img class="button-icon" src={downloadIcon} alt="download"/>ダウンロード
+      <img class="button-icon" src={downloadIcon} alt="download"/>下载
     </button>
     <button class="bg-primary-500 text-white hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-900 download-button hbox" on:click={copyToClipboard}>
-      <img class="button-icon" src={clipboardIcon} alt="copy"/>コピー
+      <img class="button-icon" src={clipboardIcon} alt="copy"/>复制
     </button>
   </div>
   <div class="hbox mx-2" style="margin-top: 4px;">
     <textarea class="mx-2 my-2 rounded-container-token grow textarea" bind:value={contactText}></textarea>
-    <button class="btn btn-sm variant-filled paper-size"  on:click={contact}>要望</button>
+    <button class="btn btn-sm variant-filled paper-size"  on:click={contact}>请求</button>
   </div>
   <div class="hbox gap mx-2" style="margin-top: 16px;">
     <button class="bg-secondary-500 text-white hover:bg-secondary-700 focus:bg-secondary-700 active:bg-secondary-900 download-button hbox" on:click={about}>

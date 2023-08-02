@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  // IndexedDBのデータベース名とストア名を定義
+  // IndexedDB分度ー塔贝ー定义储存名称和储存名称
   export let dbName: string;
   export let storeName: string;
 
   let db;
 
-  // IndexedDBを開く
+  // IndexedDB的双曲正切值
   onMount(() => {
     const openRequest = indexedDB.open(dbName, 1);
 

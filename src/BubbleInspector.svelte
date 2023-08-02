@@ -102,39 +102,39 @@
       <div class="bubble-size">{Math.round(bubble.size[0])}x{Math.round(bubble.size[1])}</div>
       {#if pinned}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <img class="pin-image" src={whitePinIcon} alt="pin" on:click={() => pinned = false} use:toolTip={"場所の固定"}/>
+      <img class="pin-image" src={whitePinIcon} alt="pin" on:click={() => pinned = false} use:toolTip={"固定位置"}/>
       {:else}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <img class="pin-image" src={pinIcon} alt="pin" on:click={() => pinned = true} use:toolTip={"場所の固定"}/>
+      <img class="pin-image" src={pinIcon} alt="pin" on:click={() => pinned = true} use:toolTip={"固定位置"}/>
       {/if}
     </div>
 
     <div class="hbox gap-x-2 expand">
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="hbox expand selected-font variant-ghost-primary rounded-container-token grow" on:click={() => $fontChooserOpen = true}>{bubble.fontFamily}</div>
-      <div class="direction hbox" use:toolTip={"縦書き/横書き"}>
+      <div class="direction hbox" use:toolTip={"垂直/横写"}>
         <RadioGroup active="variant-filled-primary" hover="hover:variant-soft-primary">
           <RadioItem bind:group={bubble.direction} name="justify" value={'v'}><img class="direction-item" src={verticalIcon} alt="title" width="12" height="12"/></RadioItem>
           <RadioItem bind:group={bubble.direction} name="justify" value={'h'}><img class="direction-item" src={horizontalIcon} alt="title" width="12" height="12"/></RadioItem>
         </RadioGroup>
       </div>
-      <input class="checkbox" type="checkbox" use:toolTip={"自動改行"} bind:checked={bubble.autoNewline}/>
+      <input class="checkbox" type="checkbox" use:toolTip={"自动换行"} bind:checked={bubble.autoNewline}/>
     </div>
 
     <div class="hbox px-2 variant-ghost-primary rounded-container-token font-color-picker" style="align-self: stretch;">
       <div class="font-bold slider-label">T</div>
-      <div class="hbox gap-0.5" use:toolTip={"フォントサイズ"}>
+      <div class="hbox gap-0.5" use:toolTip={"字体大小"}>
         <ExponentialRangeSlider name="fontsize" bind:value={bubble.fontSize} exponentialMin={100} step={1}/>
         <div class="text-xs slider-value-text">
           <div class="number-box"><NumberEdit bind:value={bubble.fontSize}/></div>
         </div>  
-        <span style="width:20px;" use:toolTip={"フォント色"}><ColorPicker bind:hex={bubble.fontColor} label="" /></span>
+        <span style="width:20px;" use:toolTip={"字体颜色"}><ColorPicker bind:hex={bubble.fontColor} label="" /></span>
       </div>
       <span class="mx-2">/</span>
-      <div class="hbox gap-0.5" use:toolTip={"フチの太さ"}>
-        <span>フチ</span>
+      <div class="hbox gap-0.5" use:toolTip={"钳口粗细"}>
+        <span>钳口</span>
         <RangeSlider name="outlinewidth" bind:value={bubble.outlineWidth} max={20} step={1} style="width:50px;"/>
-        <span style="width:20px;" use:toolTip={"フチの色"}><ColorPicker bind:hex={bubble.outlineColor} label="" /></span>
+        <span style="width:20px;" use:toolTip={"页脚颜色"}><ColorPicker bind:hex={bubble.outlineColor} label="" /></span>
       </div>
     </div>
 
@@ -148,25 +148,25 @@
     </div>
 
     <div class="hbox px-2 variant-ghost-secondary rounded-container-token font-color-picker" style="align-self: stretch;">
-      <div class="hbox" use:toolTip={"フキダシ背景色"}>
+      <div class="hbox" use:toolTip={"背景颜色"}>
         <div class="font-bold slider-label">fill</div>
         <ColorPicker bind:hex={bubble.fillColor} label="" />
       </div>
-      <div class="hbox" use:toolTip={"フキダシ枠の色"}>
+      <div class="hbox" use:toolTip={"边框颜色"}>
         <div class="font-bold slider-label">stroke</div>
         <ColorPicker bind:hex={bubble.strokeColor} label="" />
       </div>
-      <div class="hbox" use:toolTip={"フキダシ枠の太さ"}>
+      <div class="hbox" use:toolTip={"边框粗细"}>
         <RangeSlider name="line" bind:value={bubble.strokeWidth} max={10} step={1} style="width:100px;"/>
       </div>
-      <div class="embed hbox" use:toolTip={"フキダシ埋め込み"}>
+      <div class="embed hbox" use:toolTip={"对白包埋"}>
         <RadioGroup active="variant-filled-primary" hover="hover:variant-soft-primary">
           <RadioItem bind:group={bubble.embedded} name="embed" value={false}><img class="embed-item" src={unembeddedIcon} alt="embedded" width="12" height="12"/></RadioItem>
           <RadioItem bind:group={bubble.embedded} name="embed" value={true}><img class="embed-item" src={embeddedIcon} alt="unembedded" width="12" height="12"/></RadioItem>
         </RadioGroup>
       </div> 
       <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <img class="reset-image" src={resetIcon} alt="reset" on:click={reset} use:toolTip={"リセット"}/>
+      <img class="reset-image" src={resetIcon} alt="reset" on:click={reset} use:toolTip={"重设"}/>
     </div>
     <BubbleInspectorAppendix bubble={bubble} bind:this={appendix}/>
   </div>

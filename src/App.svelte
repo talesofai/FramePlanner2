@@ -44,14 +44,14 @@
       integrations: [new Sentry.Replay()],
     });
 
-    // 現在のURLのパラメータを取得する
+    // 目前URL参数ー取得数据
     const urlParams = new URLSearchParams(window.location.search);
 
-    // 'myParam' という名前のパラメータを取得する
+    // 'myParam' 名为参数ー取得数据
     if (urlParams.has('key')) {
       const key = urlParams.get('key');
 
-      // パラメータの値をコンソールに出力
+      // 参数ー转换数値ー输出到L
       console.log("key", key);
       const paper = await loadTemplate(key);
       console.log(paper);

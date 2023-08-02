@@ -2,107 +2,107 @@ import { describe, it, expect } from "vitest"
 import { kinsoku } from "./kinsoku.js"
 
 const exampleSentences = {
-  "彼女は元気に挨拶した。「こんにちは！」｛長い間会っていなかった友人に｝": 
+  "她精神饱满地打招呼。「你好」｛很久没见的朋友｝": 
   [
-    { index: 0, text: '彼女は元気', size: 5, wrap: true },
-    { index: 5, text: 'に挨拶した。', size: 5, wrap: true },
-    { index: 11, text: '「こんにち', size: 5, wrap: true },
-    { index: 16, text: 'は！」｛長', size: 5, wrap: true },
-    { index: 21, text: 'い間会って', size: 5, wrap: true },
-    { index: 26, text: 'いなかった', size: 5, wrap: true },
-    { index: 31, text: '友人に｝', size: 4, wrap: false }
+    { index: 0, text: '她很健康', size: 5, wrap: true },
+    { index: 5, text: '打招呼了。', size: 5, wrap: true },
+    { index: 11, text: '「今天', size: 5, wrap: true },
+    { index: 16, text: '哈！」｛长度', size: 5, wrap: true },
+    { index: 21, text: '久别重逢', size: 5, wrap: true },
+    { index: 26, text: '不在的', size: 5, wrap: true },
+    { index: 31, text: '给朋友｝', size: 4, wrap: false }
   ],
-  "インターネットを開いて\n最新のニュースを見た｛彼は驚いた表情で｝":
+  "接口ー打开网络\n最新新闻ー我看见苏了｛他带着惊讶的表情｝":
   [
-    { index: 0, text: 'インターネッ', size: 5, wrap: true },
-    { index: 6, text: 'トを開いて', size: 5, wrap: false },
-    { index: 12, text: '最新のニュー', size: 5, wrap: true },
-    { index: 18, text: 'スを見た', size: 5, wrap: true },
-    { index: 22, text: '｛彼は驚い', size: 5, wrap: true },
-    { index: 27, text: 'た表情で｝', size: 5, wrap: false }
+    { index: 0, text: '接口ー网络', size: 5, wrap: true },
+    { index: 6, text: '打开单元格', size: 5, wrap: false },
+    { index: 12, text: '最新新闻ー', size: 5, wrap: true },
+    { index: 18, text: '我看见苏了', size: 5, wrap: true },
+    { index: 22, text: '｛他吓了一跳', size: 5, wrap: true },
+    { index: 27, text: '表情，表情｝', size: 5, wrap: false }
   ],
-  "彼はパーティーに参加（「なぜ？」）することを楽しみにしている。｛友人たちと一緒に｝":
+  "他在巴黎ー蒂蒂ー参加（「为什么？」）我期待着做。｛和朋友们一起｝":
   [
-    { index: 0, text: '彼はパーティー', size: 5, wrap: true },
-    { index: 7, text: 'に参加', size: 5, wrap: true },
-    { index: 10, text: '（「なぜ？」）', size: 5, wrap: true },
-    { index: 17, text: 'することを', size: 5, wrap: true },
-    { index: 22, text: '楽しみにし', size: 5, wrap: true },
-    { index: 27, text: 'ている。', size: 5, wrap: true },
-    { index: 31, text: '｛友人たち', size: 5, wrap: true },
-    { index: 36, text: 'と一緒に｝', size: 5, wrap: false }
+    { index: 0, text: '他在巴黎ー蒂蒂ー', size: 5, wrap: true },
+    { index: 7, text: '参加', size: 5, wrap: true },
+    { index: 10, text: '（「为什么？」）', size: 5, wrap: true },
+    { index: 17, text: '做某事', size: 5, wrap: true },
+    { index: 22, text: '敬请期待', size: 5, wrap: true },
+    { index: 27, text: '正在进行。', size: 5, wrap: true },
+    { index: 31, text: '｛朋友们', size: 5, wrap: true },
+    { index: 36, text: '和…一起｝', size: 5, wrap: false }
   ],
-  "驚きと喜びが入り混じるニュースを聞いて、\n彼は目を丸くした。「本当に！？」":
+  "惊喜交集的新闻ー听我说\n他瞪大了眼睛。「真的！？」":
   [
-    { index: 0, text: '驚きと喜び', size: 5, wrap: true },
-    { index: 5, text: 'が入り混じ', size: 5, wrap: true },
-    { index: 10, text: 'るニュース', size: 5, wrap: true },
-    { index: 15, text: 'を聞いて、', size: 5, wrap: false },
-    { index: 21, text: '彼は目を丸', size: 5, wrap: true },
-    { index: 26, text: 'くした。', size: 5, wrap: true },
-    { index: 30, text: '「本当に！？」', size: 5, wrap: true }
+    { index: 0, text: '惊喜与喜悦', size: 5, wrap: true },
+    { index: 5, text: '混杂', size: 5, wrap: true },
+    { index: 10, text: '罗尼ー起爆', size: 5, wrap: true },
+    { index: 15, text: '听', size: 5, wrap: false },
+    { index: 21, text: '他睁大眼睛', size: 5, wrap: true },
+    { index: 26, text: '做了。', size: 5, wrap: true },
+    { index: 30, text: '「真的！？」', size: 5, wrap: true }
   ],
-  "彼が尋ねた。「これはどう使うのかな？」｛興味津々な顔で｝":
+  "他问道。「这个怎么用呢？」｛兴趣津々面带愁容｝":
   [
-    { index: 0, text: '彼が尋ねた。', size: 5, wrap: true },
-    { index: 6, text: '「これはど', size: 5, wrap: true },
-    { index: 11, text: 'う使うのか', size: 5, wrap: true },
-    { index: 16, text: 'な？」｛興', size: 5, wrap: true },
-    { index: 21, text: '味津々な顔', size: 5, wrap: true },
-    { index: 26, text: 'で｝', size: 2, wrap: false }
+    { index: 0, text: '他问道。', size: 5, wrap: true },
+    { index: 6, text: '「这是什么', size: 5, wrap: true },
+    { index: 11, text: '用吗', size: 5, wrap: true },
+    { index: 16, text: '什么？」｛', size: 5, wrap: true },
+    { index: 21, text: '味津々愁眉苦脸', size: 5, wrap: true },
+    { index: 26, text: '单击功能区上｝', size: 2, wrap: false }
   ],
-  "雨が降ってきて、彼女はびしょ\n濡れになった。「なんてこった！」":
+  "下雨了，她湿透了\n我被淋湿了。「天啊！」":
   [
-    { index: 0, text: '雨が降って', size: 5, wrap: true },
-    { index: 5, text: 'きて、彼女', size: 5, wrap: true },
-    { index: 10, text: 'はびしょ', size: 4, wrap: false },
-    { index: 15, text: '濡れになっ', size: 5, wrap: true },
-    { index: 20, text: 'た。「なん', size: 5, wrap: true },
-    { index: 25, text: 'てこった！」', size: 5, wrap: true }
+    { index: 0, text: '下雨了', size: 5, wrap: true },
+    { index: 5, text: '来吧，她', size: 5, wrap: true },
+    { index: 10, text: '白垩', size: 4, wrap: false },
+    { index: 15, text: '淋湿了', size: 5, wrap: true },
+    { index: 20, text: '来定义自定义外观。「软的', size: 5, wrap: true },
+    { index: 25, text: '我来了！」', size: 5, wrap: true }
   ],
-  "サッカーチームは\n必勝を信じ、練習に励んでいる。「優勝するぞ！」と監督が叫んだ。":
+  "窗框ー拉刀ー姆波\n相信必胜，努力练习。「我要赢了！」导演喊了起来。":
   [
-    { index: 0, text: 'サッカーチー', size: 5, wrap: true },
-    { index: 6, text: 'ムは', size: 2, wrap: false },
-    { index: 9, text: '必勝を信じ、', size: 5, wrap: true },
-    { index: 15, text: '練習に励ん', size: 5, wrap: true },
-    { index: 20, text: 'でいる。', size: 5, wrap: true },
-    { index: 24, text: '「優勝する', size: 5, wrap: true },
-    { index: 29, text: 'ぞ！」と監', size: 5, wrap: true },
-    { index: 34, text: '督が叫んだ。', size: 5, wrap: true }
+    { index: 0, text: '窗框ー拉刀ー', size: 5, wrap: true },
+    { index: 6, text: '姆波', size: 2, wrap: false },
+    { index: 9, text: '相信必胜', size: 5, wrap: true },
+    { index: 15, text: '努力练习', size: 5, wrap: true },
+    { index: 20, text: '的支持。', size: 5, wrap: true },
+    { index: 24, text: '「获得冠军', size: 5, wrap: true },
+    { index: 29, text: '喂！」监督', size: 5, wrap: true },
+    { index: 34, text: '督喊道。', size: 5, wrap: true }
   ],
-  "彼は敵を巧妙な動きで翻弄した。「こんなに速くて強いのか！」":
+  "他用巧妙的动作捉弄敌人。「这么快又强！」":
   [
-    { index: 0, text: '彼は敵を巧', size: 5, wrap: true },
-    { index: 5, text: '妙な動きで', size: 5, wrap: true },
-    { index: 10, text: '翻弄した。', size: 5, wrap: true },
-    { index: 15, text: '「こんなに', size: 5, wrap: true },
-    { index: 20, text: '速くて強い', size: 5, wrap: true },
-    { index: 25, text: 'のか！」', size: 4, wrap: false }
+    { index: 0, text: '他巧妙地抓住了敌人', size: 5, wrap: true },
+    { index: 5, text: '用奇怪的动作', size: 5, wrap: true },
+    { index: 10, text: '玩弄啦。', size: 5, wrap: true },
+    { index: 15, text: '「如此，如此', size: 5, wrap: true },
+    { index: 20, text: '又快又强', size: 5, wrap: true },
+    { index: 25, text: '啊！」', size: 4, wrap: false }
   ],
-  "友人たちは言った。「おめでとう！成功を祝福するよ」":
+  "朋友们说。「恭喜恭喜！祝福你成功」":
   [
-    { index: 0, text: '友人たちは', size: 5, wrap: true },
-    { index: 5, text: '言った。', size: 5, wrap: true },
-    { index: 9, text: '「おめでと', size: 5, wrap: true },
-    { index: 14, text: 'う！成功を', size: 5, wrap: true },
-    { index: 19, text: '祝福するよ」', size: 5, wrap: true }
+    { index: 0, text: '朋友们', size: 5, wrap: true },
+    { index: 5, text: '我说了。', size: 5, wrap: true },
+    { index: 9, text: '「恭喜', size: 5, wrap: true },
+    { index: 14, text: '嗯！成功', size: 5, wrap: true },
+    { index: 19, text: '祝福你」', size: 5, wrap: true }
   ],
-  "彼の言葉には深い感動が込められていた。「君がここにいてくれて本当に嬉しい」":
+  "他的话里充满了深深的感动。「你能在这里我真的很开心」":
   [
-    { index: 0, text: '彼の言葉に', size: 5, wrap: true },
-    { index: 5, text: 'は深い感動', size: 5, wrap: true },
-    { index: 10, text: 'が込められ', size: 5, wrap: true },
-    { index: 15, text: 'ていた。', size: 5, wrap: true },
-    { index: 19, text: '「君がここ', size: 5, wrap: true },
-    { index: 24, text: 'にいてくれ', size: 5, wrap: true },
-    { index: 29, text: 'て本当に嬉', size: 5, wrap: true },
-    { index: 34, text: 'しい」', size: 3, wrap: false }
+    { index: 0, text: '他的话', size: 5, wrap: true },
+    { index: 5, text: '是深深的感动', size: 5, wrap: true },
+    { index: 10, text: '包含', size: 5, wrap: true },
+    { index: 15, text: '来定义自定义外观。', size: 5, wrap: true },
+    { index: 19, text: '「你在这里', size: 5, wrap: true },
+    { index: 24, text: '待在我身边', size: 5, wrap: true },
+    { index: 29, text: '真的很高兴', size: 5, wrap: true },
+    { index: 34, text: '清秀」', size: 3, wrap: false }
   ],
 };
 
-describe('禁則処理', () => {
-  it('禁則処理', () => {
+describe('禁则处理', () => {
+  it('禁则处理', () => {
     Object.entries(exampleSentences).forEach(([k, v]) => {
       const a = kinsoku(s => ({ size: s.length, wrap: 5 < s.length }), 5, k);
       expect(a).toStrictEqual(v);

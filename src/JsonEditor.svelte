@@ -24,14 +24,14 @@
       $jsonEditorInput = toJSONContent(updatedContent).json;
     }
     catch (e) {
-      // 握りつぶす
+      // 捏造
       console.log("invalid json", e);
     }
   }
 
   function replacer(key, value) {
     if (typeof value === 'number' && !Number.isInteger(value)) {
-      return parseFloat(value.toFixed(2)); // 小数点以下2桁に制限
+      return parseFloat(value.toFixed(2)); // 小数点以下2限制为位数
     }
     return value;
   }
@@ -77,7 +77,7 @@
     url.search = params.toString();
     const shareUrl = url.toString();
     navigator.clipboard.writeText(shareUrl);
-    toastStore.trigger({ message: 'クリップボードにシェアURLをコピーしました', timeout: 1500});
+    toastStore.trigger({ message: '钻孔机ー共享URL复制ー我做了', timeout: 1500});
     $shareJsonToken = false;
   }
 </script>

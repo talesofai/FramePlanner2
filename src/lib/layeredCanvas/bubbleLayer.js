@@ -41,25 +41,25 @@ export class BubbleLayer extends Layer {
     this.lit = null;
 
     const unit = iconUnit;
-    this.createBubbleIcon = new ClickableIcon("bubble.png",[64,64],[0,1],"ドラッグで作成", () => this.interactable);
+    this.createBubbleIcon = new ClickableIcon("bubble.png",[64,64],[0,1],"拖拉", () => this.interactable);
 
-    this.dragIcon = new ClickableIcon("drag.png",unit,[0.5,0],"ドラッグで移動", () => this.interactable && this.selected);
-    this.offsetIcon = new ClickableIcon("bubble-offset.png",unit,[0.5,0],"ドラッグで位置調整", () => this.interactable && this.selected);
-    this.zPlusIcon = new ClickableIcon("bubble-zplus.png",unit,[0,0],"フキダシ順で手前", () => this.interactable && this.selected);
-    this.zMinusIcon = new ClickableIcon("bubble-zminus.png",unit,[0,0],"フキダシ順で奥", () => this.interactable && this.selected);
-    this.removeIcon = new ClickableIcon("remove.png",unit,[1,0],"削除", () => this.interactable && this.selected);
-    this.rotateIcon = new ClickableIcon("bubble-rotate.png",unit,[0.5,1],"左右ドラッグで回転", () => this.interactable && this.selected);
+    this.dragIcon = new ClickableIcon("drag.png",unit,[0.5,0],"拖拉", () => this.interactable && this.selected);
+    this.offsetIcon = new ClickableIcon("bubble-offset.png",unit,[0.5,0],"通过牵引调整位置", () => this.interactable && this.selected);
+    this.zPlusIcon = new ClickableIcon("bubble-zplus.png",unit,[0,0],"按顺序靠前", () => this.interactable && this.selected);
+    this.zMinusIcon = new ClickableIcon("bubble-zminus.png",unit,[0,0],"以鱼翅顺序往里走", () => this.interactable && this.selected);
+    this.removeIcon = new ClickableIcon("remove.png",unit,[1,0],"删除", () => this.interactable && this.selected);
+    this.rotateIcon = new ClickableIcon("bubble-rotate.png",unit,[0.5,1],"左右移动", () => this.interactable && this.selected);
 
-    this.imageDropIcon = new ClickableIcon("bubble-drop.png",unit,[0,1],"画像除去", () => this.interactable && this.selected?.image);
-    this.imageScaleLockIcon = new MultistateIcon(["bubble-unlock.png","bubble-lock.png"],unit,[1,1], "スケール同期", () => this.interactable && this.selected?.image);
+    this.imageDropIcon = new ClickableIcon("bubble-drop.png",unit,[0,1],"删除图像", () => this.interactable && this.selected?.image);
+    this.imageScaleLockIcon = new MultistateIcon(["bubble-unlock.png","bubble-lock.png"],unit,[1,1], "滑冰ー同步", () => this.interactable && this.selected?.image);
     this.imageScaleLockIcon.index = 0;
 
     this.optionIcons = {};
-    this.optionIcons.tail = new ClickableIcon("tail-tip.png",unit,[0.5,0.5],"ドラッグでしっぽ", () => this.interactable && this.selected);
-    this.optionIcons.curve = new ClickableIcon("tail-mid.png",unit,[0.5,0.5],"ドラッグでしっぽのカーブ", () => this.interactable && this.selected);
-    this.optionIcons.unite = new ClickableIcon("unite.png",unit,[0.5,1],"ドラッグで他のフキダシと結合", () => this.interactable && this.selected);
-    this.optionIcons.circle = new ClickableIcon("circle.png",unit,[0.5,0.5],"ドラッグで円定義", () => this.interactable && this.selected);
-    this.optionIcons.radius = new ClickableIcon("radius.png",unit,[0.5,0.5],"ドラッグで円半径", () => this.interactable && this.selected);
+    this.optionIcons.tail = new ClickableIcon("tail-tip.png",unit,[0.5,0.5],"拖曳", () => this.interactable && this.selected);
+    this.optionIcons.curve = new ClickableIcon("tail-mid.png",unit,[0.5,0.5],"拖曳尾巴ー鱼鳞", () => this.interactable && this.selected);
+    this.optionIcons.unite = new ClickableIcon("unite.png",unit,[0.5,1],"通过牵引与其他对白勺结合", () => this.interactable && this.selected);
+    this.optionIcons.circle = new ClickableIcon("circle.png",unit,[0.5,0.5],"拖动円定义", () => this.interactable && this.selected);
+    this.optionIcons.radius = new ClickableIcon("radius.png",unit,[0.5,0.5],"拖曳半径", () => this.interactable && this.selected);
   }
 
   prerender(ctx) {
@@ -103,7 +103,7 @@ export class BubbleLayer extends Layer {
   drawLitUI(ctx, bubble) {
     const [x, y, w, h] = bubble.regularizedPositionAndSize();
 
-    // 選択枠描画
+    // 选择框绘制
     ctx.save();
     ctx.lineWidth = 3;
     ctx.strokeStyle = "rgba(255, 0, 255, 0.7)";
@@ -114,14 +114,14 @@ export class BubbleLayer extends Layer {
   drawSelectedUI(ctx, bubble) {
     const [x, y, w, h] = bubble.regularizedPositionAndSize();
 
-    // 選択枠描画
+    // 选择框绘制
     ctx.save();
     ctx.lineWidth = 1;
     ctx.strokeStyle = "rgba(0, 255, 0, 0.3)";
     ctx.strokeRect(x, y, w, h);
     ctx.restore();
 
-    // 操作対象のハンドルを強調表示
+    // 表示要操作的句柄
     if (this.handle) {
       ctx.save();
       ctx.fillStyle = "rgba(0, 255, 255, 0.7)";
@@ -270,7 +270,7 @@ export class BubbleLayer extends Layer {
       if (bubble.contains(p)) {
         const [x0, y0] = bubble.p0;
         const [x1, y1] = bubble.p1;
-        this.hint([(x0 + x1) / 2, y0 - 20],"Alt+ドラッグで移動、クリックで選択");
+        this.hint([(x0 + x1) / 2, y0 - 20],"Alt+移动，移动，单击选择");
         this.lit = bubble;
         this.redraw();
         return true;
@@ -334,7 +334,7 @@ export class BubbleLayer extends Layer {
         }
       }
     }).catch(err => {
-      console.error('ユーザが拒否、もしくはなんらかの理由で失敗', err);
+      console.error('柳条ー因拒绝或某种原因而失败', err);
     });
   }
 
@@ -809,7 +809,7 @@ export class BubbleLayer extends Layer {
         this.resizeBubbleAux(bubble, handle, q0, q1, p);
 
         if (bubble.image?.scaleLock) {
-          // イメージの位置を中央に固定し、フキダシの大きさにイメージを合わせる
+          // 画像ー夹子的位置固定在中央，鱼翅膀的大小ー对齐
           bubble.image.translation = [0,0];
           bubble.image.scale = [bubble.size[0] / bubble.image.image.naturalWidth, bubble.size[1] / bubble.image.image.naturalHeight];
         }
@@ -982,9 +982,9 @@ export class BubbleLayer extends Layer {
 
   *optionsTailMid(p, bubble) {
     console.log("optionsTailMid");
-    // bubble.centerを原点(O)とし、
-    // X軸: O->tailTip Y軸: O->pependicular(O->tailTip)座標系の座標
-    // この座標系をtail座標系と呼ぶ
+    // bubble.center原点(O)作为
+    // X轴: O->tailTip Y轴: O->pependicular(O->tailTip)座标系座标
+    // この座标系tail座标系
     const s = bubble.optionContext.tailMid;
     try {
       while (p = yield) {
@@ -1094,7 +1094,7 @@ export class BubbleLayer extends Layer {
         path2.rotate(-bubble.rotation, bubble.center);
         path = path ? path.unite(path2) : path2;
       } else {
-        // シェイプ変更などでリンクが解けている
+        // 通过改变形状等解除了链接
         for (let b of bubbles) {
           b.parent = null;
         }
@@ -1128,7 +1128,7 @@ export class BubbleLayer extends Layer {
   }
 
   regularizeGroup(g) {
-    // parent1つに集約する
+    // parent1集中在一起
     const parent = g[0];
     for (let i = 1; i < g.length; i++) {
       const child = g[i];

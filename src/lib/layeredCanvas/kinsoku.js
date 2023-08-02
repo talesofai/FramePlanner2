@@ -8,10 +8,10 @@ const leaderChars = makeTable(`
 `);
 
 const trailerChars = makeTable(`
-、。，．・：；？！ー”）〕］｝〉》」』】
+。将出现。，．・：；？！ー”）〕］｝〉》」』】
 ヽヾゝゞ々
-ぁぃぅぇぉっゃゅょゎ
-ァィゥェォッャュョヮ
+我的天
+哇哦哇哦
 ,.:;?!-\" ')]}
 `);
 
@@ -33,7 +33,7 @@ function* kinsokuGenerator(wrapDetector, wrapSize, getNext, startIndex) {
 
   function countOidashi() {
     for (let back = 0 ; back < maxOidashiDepth ; back++) {
-      // index<0のときはundefinedなのでhas(index)=false
+      // index<0在…的时候undefined所以has(index)=false
       if (!leaderChars.has(buffer[cursor-1-back])) { return back; }
     }
     return maxOidashiDepth;
@@ -52,13 +52,13 @@ function* kinsokuGenerator(wrapDetector, wrapSize, getNext, startIndex) {
       if (!wrap) { lineSize = size; cursor++; continue; }
     }
 
-    // 折りたたみ
+    // 折叠
     if (wrapSize != null) { lineSize = wrapSize; }
 
-    // 追い出し処理
+    // 驱逐处理
     let back = countOidashi();
     if (back === 0) {
-      // ぶら下げ処理
+      // 悬挂处理
       for (let depth = 0 ; depth < maxBurasageDepth ; depth++) {
         const c = peek();
         if (!trailerChars.has(c)) { break; }

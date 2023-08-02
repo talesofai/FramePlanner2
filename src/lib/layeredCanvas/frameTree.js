@@ -3,13 +3,13 @@ import { intersection, line, line2, deg2rad } from "./geometry";
 
 export class FrameElement {
   constructor(size) {
-    // 保持するのは兄弟間でのみ有効な相対サイズ（ローカル座標）
-    // 絶対座標はレンダリング時に算出する
+    // 仅在同级之间保留有效的相对大小（roー卡尔坐标）
+    // 在渲染时计算绝对坐标
     this.rawSize = size;
     this.direction = null;
     this.children = [];
-    this.localLength = 0; // 主軸サイズ
-    this.localBreadth = 0; // 交差軸サイズ
+    this.localLength = 0; // 主轴尺寸
+    this.localBreadth = 0; // 交叉轴尺寸
     this.divider = { spacing: 0, slant: 0 };
     this.padding = { top: 0, bottom: 0, left: 0, right: 0};
     this.translation = [0, 0];
@@ -26,7 +26,7 @@ export class FrameElement {
     this.semantics = null;
     this.prompt = null;
 
-    // リーフ要素の場合は絵がある可能性がある
+    // 里氏ー如果是fu元素的话，可能有画
     this.image = null;
     this.focused = false;
   }
@@ -163,16 +163,16 @@ export class FrameElement {
     const parent = this.findParent(root, target);
     if (parent) {
       if (parent.children.length === 1) { 
-        // 兄弟がいない場合は親を削除する
+        // 删除父代（如果没有同级）
         this.eraseElement(root, parent);
       } else {
-        // 兄弟がいる場合は親から削除する
+        // 如果有兄弟姐妹，请从父代中删除
         const index = parent.children.indexOf(target);
         parent.children.splice(index, 1);
         parent.calculateLengthAndBreadth();
       }
     }
-    // ルート要素は削除できない
+    // 旋转ー无法删除元素
   }
 
   static duplicateElement(root, target) {
@@ -185,7 +185,7 @@ export class FrameElement {
       parent.children.splice(index+1, 0, newElement);
       parent.calculateLengthAndBreadth();
     }
-    // ルート要素は複製できない(ことにしておく)
+    // 旋转ー无法复制元素(留待)
   }
 
   static splitElementHorizontal(root, target) {
@@ -367,7 +367,7 @@ function calculatePhysicalLayoutLeaf(element, rawSize, rawOrigin, rawCorners) {
   const leftLine = line(rawCorners.topLeft, rawCorners.bottomLeft, [padding.left * w, 0]);
   const rightLine = line(rawCorners.topRight, rawCorners.bottomRight, [-padding.right * w, 0]);
 
-  // 長さが0のときは交点を作れない
+  // 长度0在…的时候不能做交点
   const corners = {
     topLeft: intersection(topLine, leftLine) || rawCorners.topLeft,
     topRight: intersection(topLine, rightLine) || rawCorners.topRight,

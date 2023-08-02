@@ -18,9 +18,9 @@ export function drawHorizontalText(context, method, r, text, baselineSkip, m, au
 
   for (let [i, line] of m.lines.entries()) {
     if (method === "fill") {
-      context.fillText(line.text, r.x, r.y + baselineSkip * i + baselineSkip * 0.8 /* Ascentの雑な計算 */ );
+      context.fillText(line.text, r.x, r.y + baselineSkip * i + baselineSkip * 0.8 /* Ascent粗略计算 */ );
     } else if (method === "stroke") {
-      context.strokeText(line.text, r.x, r.y + baselineSkip * i + baselineSkip * 0.8 /* Ascentの雑な計算 */ );
+      context.strokeText(line.text, r.x, r.y + baselineSkip * i + baselineSkip * 0.8 /* Ascent粗略计算 */ );
     }
   }
 }

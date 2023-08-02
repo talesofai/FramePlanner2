@@ -1,9 +1,9 @@
 import { add2D, lerp2D, multiply2D, projectionScalingFactor2D, center2D, subtract2D, perpendicular2D, angleDifference, superEllipsePoint2D, normalize2D, intersection, magnitude2D } from "./geometry.js";
 
 export function tailCoordToWorldCoord(center, tailTip, tailMid) {
-  // bubble.centerを原点(O)とし、
-  // X軸: O->tailTip Y軸: O->pependicular(O->tailTip)座標系の座標
-  // この座標系をtail座標系と呼ぶ
+  // bubble.center原点(O)作为
+  // X轴: O->tailTip Y轴: O->pependicular(O->tailTip)座标系座标
+  // この座标系tail座标系
   const [cx, cy] = center;
   const [tx, ty] = tailTip;
   const [mx, my] = tailMid;
@@ -39,7 +39,7 @@ export function generateSuperEllipsePoints(size, angles, n = 3) {
 }
 
 export function jitterDistances(rng, points, bump, jitter, step=2) {
-  // 原点からの距離をjitterに応じてランダムに変化させる
+  // 距离原点的距离jitter随机应变
   const newPoints = [];
   for (let i = 0; i < points.length; i++) {
     if (i % step === 0) {

@@ -41,7 +41,7 @@
   async function onChangeGallery(gallery) {
     if (gallery) {
       images = [];
-      await tick(); // HACK: なんかこうしないとHTMLが更新されない
+      await tick(); // HACK: 如果不这样做的话HTML未更新
       images = gallery;
     }
   }
@@ -56,8 +56,8 @@
         progress = data.progress;
       }
 
-      // getPorgression呼び出しが1秒を超えると嫌なので
-      // setIntervalは使わない
+      // getPorgression调用1因为超秒的话会讨厌
+      // setInterval不使用
       setTimeout(
         () => {
           if (calling) {
@@ -76,7 +76,7 @@
       progress = 1;
     } catch (e) {
       console.log(e);
-      toastStore.trigger({ message: `画像生成エラー: ${e}`, timeout: 3000});
+      toastStore.trigger({ message: `图像生成错误ー: ${e}`, timeout: 3000});
       progress = 0;
     }
     calling = false;
@@ -110,7 +110,7 @@
 
   async function scribble() {
     if (!refered) {
-      toastStore.trigger({ message: `参照画像を選択してください`, timeout: 3000});
+      toastStore.trigger({ message: `请选择参考画像`, timeout: 3000});
       return;
     } 
 
@@ -123,8 +123,8 @@
         progress = data.progress;
       }
 
-      // getPorgression呼び出しが1秒を超えると嫌なので
-      // setIntervalは使わない
+      // getPorgression调用1因为超秒的话会讨厌
+      // setInterval不使用
       setTimeout(() => {if (calling) {f();}},1000);
     };
 
@@ -156,7 +156,7 @@
       progress = 1;
     } catch (e) {
       console.log(e);
-      toastStore.trigger({ message: `画像生成エラー: ${e}`, timeout: 3000});
+      toastStore.trigger({ message: `图像生成错误ー: ${e}`, timeout: 3000});
       progress = 0;
     }
     calling = false;

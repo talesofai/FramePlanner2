@@ -24,32 +24,32 @@ export class FrameLayer extends Layer {
     const unit = iconUnit;
     const isFrameActive = () => this.interactable && this.focusedLayout && !this.pointerHandler;
     const isFrameActiveAndVisible = () => this.interactable && 0 < this.focusedLayout?.element.visibility && !this.pointerHandler;
-    this.splitHorizontalIcon = new ClickableIcon("split-horizontal.png",unit,[0.5,0.5],"横に分割", isFrameActiveAndVisible);
-    this.splitVerticalIcon = new ClickableIcon("split-vertical.png",unit,[0.5,0.5],"縦に分割", isFrameActiveAndVisible);
-    this.deleteIcon = new ClickableIcon("delete.png",unit,[1,0],"削除", isFrameActive);
-    this.duplicateIcon = new ClickableIcon("duplicate.png",unit,[1,0],"複製", isFrameActive);
-    this.insertIcon = new ClickableIcon("insert.png",unit,[1,0],"画像のシフト", isFrameActive);
-    this.spliceIcon = new ClickableIcon("splice.png",unit,[1,0],"画像のアンシフト", isFrameActive);
-    this.zplusIcon = new ClickableIcon("zplus.png",unit,[0,0],"手前に", isFrameActiveAndVisible);
-    this.zminusIcon = new ClickableIcon("zminus.png",unit,[0,0],"奥に", isFrameActiveAndVisible);
-    this.visibilityIcon = new MultistateIcon(["visibility1.png","visibility2.png","visibility3.png"],unit,[0,0], "不可視/背景と絵/枠線も", () => this.interactable && this.focusedLayout && !this.pointerHandler);
+    this.splitHorizontalIcon = new ClickableIcon("split-horizontal.png",unit,[0.5,0.5],"水平拆装", isFrameActiveAndVisible);
+    this.splitVerticalIcon = new ClickableIcon("split-vertical.png",unit,[0.5,0.5],"垂直分解", isFrameActiveAndVisible);
+    this.deleteIcon = new ClickableIcon("delete.png",unit,[1,0],"删除", isFrameActive);
+    this.duplicateIcon = new ClickableIcon("duplicate.png",unit,[1,0],"复制", isFrameActive);
+    this.insertIcon = new ClickableIcon("insert.png",unit,[1,0],"图像偏移", isFrameActive);
+    this.spliceIcon = new ClickableIcon("splice.png",unit,[1,0],"取消移动画像", isFrameActive);
+    this.zplusIcon = new ClickableIcon("zplus.png",unit,[0,0],"在前", isFrameActiveAndVisible);
+    this.zminusIcon = new ClickableIcon("zminus.png",unit,[0,0],"在里面", isFrameActiveAndVisible);
+    this.visibilityIcon = new MultistateIcon(["visibility1.png","visibility2.png","visibility3.png"],unit,[0,0], "不可见/背景和图画/还有边框", () => this.interactable && this.focusedLayout && !this.pointerHandler);
     this.visibilityIcon.index = 2;
 
     const isImageActive = () => this.interactable && this.focusedLayout?.element.image && !this.pointerHandler;
-    this.scaleIcon = new ClickableIcon("scale.png",unit,[1,1],"スケール", () => this.interactable && this.focusedLayout?.element.image);
-    this.rotateIcon = new ClickableIcon("rotate.png",unit,[1,1],"回転", () => this.interactable && this.focusedLayout?.element.image);
-    this.dropIcon = new ClickableIcon("drop.png",unit,[0,1],"画像除去", isImageActive);
-    this.flipHorizontalIcon = new ClickableIcon("flip-horizontal.png",unit,[0,1],"左右反転", isImageActive);
-    this.flipVerticalIcon = new ClickableIcon("flip-vertical.png",unit,[0,1],"上下反転", isImageActive);
-    this.fitIcon = new ClickableIcon("fit.png",unit,[0,1],"フィット", isImageActive);
-    this.generateIcon = new ClickableIcon("generate-image.png",unit,[0,1],"画像生成", isFrameActiveAndVisible);
-    this.scribbleIcon = new ClickableIcon("scribble.png",unit,[0,1],"落書き", isFrameActiveAndVisible);
+    this.scaleIcon = new ClickableIcon("scale.png",unit,[1,1],"滑冰ー旋转", () => this.interactable && this.focusedLayout?.element.image);
+    this.rotateIcon = new ClickableIcon("rotate.png",unit,[1,1],"旋转", () => this.interactable && this.focusedLayout?.element.image);
+    this.dropIcon = new ClickableIcon("drop.png",unit,[0,1],"删除图像", isImageActive);
+    this.flipHorizontalIcon = new ClickableIcon("flip-horizontal.png",unit,[0,1],"水平翻转", isImageActive);
+    this.flipVerticalIcon = new ClickableIcon("flip-vertical.png",unit,[0,1],"垂直翻转", isImageActive);
+    this.fitIcon = new ClickableIcon("fit.png",unit,[0,1],"适合", isImageActive);
+    this.generateIcon = new ClickableIcon("generate-image.png",unit,[0,1],"图像生成", isFrameActiveAndVisible);
+    this.scribbleIcon = new ClickableIcon("scribble.png",unit,[0,1],"涂鸦", isFrameActiveAndVisible);
 
     const isBorderActive = (dir) => this.interactable && this.focusedBorder?.layout.dir === dir;
-    this.expandHorizontalIcon = new ClickableIcon("expand-horizontal.png",unit,[0.5,1],"幅を変更", () => isBorderActive('h'));
-    this.slantHorizontalIcon = new ClickableIcon("slant-horizontal.png", unit,[0.5,0],"傾き", () => isBorderActive('h'));
-    this.expandVerticalIcon = new ClickableIcon("expand-vertical.png",unit,[1,0.5],"幅を変更", () => isBorderActive('v'));
-    this.slantVerticalIcon = new ClickableIcon("slant-vertical.png", unit,[0,0.5],"傾き", () => isBorderActive('v'));
+    this.expandHorizontalIcon = new ClickableIcon("expand-horizontal.png",unit,[0.5,1],"修改幅度", () => isBorderActive('h'));
+    this.slantHorizontalIcon = new ClickableIcon("slant-horizontal.png", unit,[0.5,0],"倾斜", () => isBorderActive('h'));
+    this.expandVerticalIcon = new ClickableIcon("expand-vertical.png",unit,[1,0.5],"修改幅度", () => isBorderActive('v'));
+    this.slantVerticalIcon = new ClickableIcon("slant-vertical.png", unit,[0,0.5],"倾斜", () => isBorderActive('v'));
 
     this.transparentPattern = new Image();
     this.transparentPattern.src = new URL("../../assets/transparent.png",import.meta.url).href;
@@ -67,7 +67,7 @@ export class FrameLayer extends Layer {
       return;
     }
 
-    if (0 < this.focusedLayout?.element.visibility) {  // z値を表示
+    if (0 < this.focusedLayout?.element.visibility) {  // z显示值
       ctx.font = '24px serif';
       ctx.fillStyle = "#86C8FF";
       const l = this.focusedLayout;
@@ -146,9 +146,9 @@ export class FrameLayer extends Layer {
       const x = origin[0] + size[0] / 2;
       if (this.hintIfContains(point, this.frameIcons)) {
       } else if (this.focusedLayout.element.image) {
-        this.hint([x, origin[1] + 16],"ドラッグで移動、Ctrl+ドラッグでスケール、Alt+ドラッグで回転");
+        this.hint([x, origin[1] + 16],"拖拉Ctrl+拖曳ー鲁Alt+牵引旋转");
       } else if (0 < this.focusedLayout.element.visibility) {
-        this.hint([x, origin[1] + 48], "画像をドロップ");
+        this.hint([x, origin[1] + 48], "拖放画像");
       } else {
         this.hint([x, origin[1] + 48], null);
       }
@@ -162,7 +162,7 @@ export class FrameLayer extends Layer {
     if (keyDownFlags["KeyB"]) {
       this.focusedPadding = findPaddingAt(layout, point);
       if (this.focusedPadding) {
-        this.hint(point, "ドラッグでパディング変更");
+        this.hint(point, "拖曳変更充填");
         this.redraw();
       }
       return;
@@ -172,7 +172,7 @@ export class FrameLayer extends Layer {
     if (this.focusedLayout) {
       setUpFocusedLayout();
 
-      // アイコンはボーダーに優先
+      // 目标为ー达达ー优先
       for (let e of this.frameIcons) {
         if (e.contains(point)) {
           return ;

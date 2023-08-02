@@ -17,6 +17,8 @@
     "@tsconfig/svelte": "^3.0.0",
     "@types/webfontloader": "^1.6.35",
     "autoprefixer": "^10.4.7",
+    "i18next": "^23.4.1",
+    "i18next-parser": "^8.3.0",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.14",
     "postcss-load-config": "^4.0.1",

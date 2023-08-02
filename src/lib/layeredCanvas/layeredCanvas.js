@@ -99,7 +99,7 @@ export class LayeredCanvas {
     handlePointerMove(event) {
         this.pointerCursor = this.getPaperPosition(event);
         if (this.draggingLayer) {
-            this.draggingLayer.pointerMove(this.pointerCursor, this.payload); // 念のため別の実体
+            this.draggingLayer.pointerMove(this.pointerCursor, this.payload); // 以防万一，别の実体
             this.redrawIfRequired();
         } else {
             let p = this.pointerCursor;
@@ -146,9 +146,9 @@ export class LayeredCanvas {
 
     handleDrop(event) {
         this.pointerCursor = this.getPaperPosition(event);
-        event.preventDefault();  // ブラウザのデフォルトの画像表示処理をOFF
+        event.preventDefault();  // 浏览器的默认画像表示处理OFF
         var file = event.dataTransfer.files[0];
-        if (!file) return; // 選択テキストのドロップなど
+        if (!file) return; // 选择文本的下拉列表等
 
         if (!file.type.match(/^image\/(png|jpeg|gif)$/)) return;
 
@@ -225,10 +225,10 @@ export class LayeredCanvas {
 
         this.context.save();
         this.context.translate(this.canvas.width * 0.5, this.canvas.height * 0.5);  // 画面中央
-        this.context.translate(...this.canvas.paper.translate);                     // パン
-        this.context.translate(...this.canvas.paper.viewTranslate);                 // パン(一時)
-        this.context.scale(...this.canvas.paper.scale);       // 拡大縮小
-        this.context.translate(-this.canvas.paper.size[0] * 0.5, -this.canvas.paper.size[1] * 0.5); // 紙面中央
+        this.context.translate(...this.canvas.paper.translate);                     // 面包
+        this.context.translate(...this.canvas.paper.viewTranslate);                 // 面包(暂时，暂时)
+        this.context.scale(...this.canvas.paper.scale);       // 缩小
+        this.context.translate(-this.canvas.paper.size[0] * 0.5, -this.canvas.paper.size[1] * 0.5); // 纸面中央
         for (let layer of this.layers) {
             layer.render(this.context);
         }

@@ -80,7 +80,7 @@
     if (!token) return;
     console.log('tokenValue', token);
     paper.commit();
-    $jsonEditorOutput = documentOutput; // かなりハック、なぜかdocumentOutputのりアクティブが飛んでこないので
+    $jsonEditorOutput = documentOutput; // 相当于哈克，为什么documentOutput因为紫菜活动没有飞过来
     $commitToken = false;
   }
 

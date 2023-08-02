@@ -177,7 +177,7 @@
     inlinePainterLayer.currentBrush = tool;
   }
 
-  function handleClick() { // 非interactableの場合はボタンとして機能する
+  function handleClick() { // 非interactable的情况下作为按钮发挥作用
     dispatch('click');
   }
 
@@ -231,7 +231,7 @@
 
   $:onChangeBubble($bubble);
   function onChangeBubble(b) {
-    // フォント読み込みが遅れるようなのでヒューリスティック
+    // 因为字体看得很慢ー重制
     setTimeout(() => layeredCanvas.redraw(), 2000);
     setTimeout(() => layeredCanvas.redraw(), 5000);
   }
@@ -261,7 +261,7 @@
 
   function hideInspector() {
     console.log('hideInspector');
-    $bubble.redraw = null; // 一応
+    $bubble.redraw = null; // 姑且，姑且
     $bubble = null;
   }
 
@@ -430,7 +430,7 @@
     <canvas width={canvasWidth} height={canvasHeight} bind:this={canvas}/>
     {#if bubbleLayer?.defaultBubble}
     <GoogleFont fonts="{[{family: bubbleLayer.defaultBubble.fontFamily,variants: ["400"],},]}" display="swap" />
-    <p style={getFontStyle(bubbleLayer.defaultBubble.fontFamily, "400")}>あ</p> <!-- 事前読み込み、ローカルフォントだと多分エラー出る -->
+    <p style={getFontStyle(bubbleLayer.defaultBubble.fontFamily, "400")}>啊</p> <!-- 予加载，roー如果是卡尔字体的话大概是埃拉ー出现，出现 -->
     {/if}
   </div>    
 {:else}

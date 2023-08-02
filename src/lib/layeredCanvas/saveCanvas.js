@@ -1,5 +1,5 @@
 // crc32
-// CRC32を初期化
+// CRC32初始化
 function initCrc32Table() {
     const crcTable = new Uint32Array(256);
     for (let i = 0; i < 256; i++) {
@@ -12,7 +12,7 @@ function initCrc32Table() {
     return crcTable;
 }
   
-// データのCRC32を計算
+// 分度ー数据CRC32计算
 function getCrc32(data, crc = 0) {
     const crcTable = initCrc32Table();
     crc = (crc ^ 0xFFFFFFFF) >>> 0;
@@ -41,12 +41,12 @@ function visitPng(png, type) {
     var Signature = String.fromCharCode(137, 80, 78, 71, 13, 10, 26, 10);
     var rpos = 0;
 
-    // シグネチャの確認
+    // 确认签名
     if (String.fromCharCode.apply(null, png.subarray(rpos, rpos += 8)) !== Signature) {
         throw new Error('invalid signature');
     }
 
-    // チャンクの探索
+    // 搜索情报块
     while (rpos < png.length) {
         dataLength = (
             (png[rpos++] << 24) |
@@ -105,15 +105,15 @@ function createChunk(type, data) {
 function insertChunk(destBuffer, sourceBuffer, rpos, chunk) {
     var pos = 0;
 
-    // IDAT チャンクの前までコピー
+    // IDAT 复制到昌克面前ー
     destBuffer.set(sourceBuffer.subarray(0, rpos), pos);
     pos += rpos;
 
-    // hoGe チャンクをコピー
+    // hoGe 复制区块ー
     destBuffer.set(chunk, pos);
     pos += chunk.length;
 
-    // IDAT チャンク以降をコピー
+    // IDAT 复制组以后ー
     destBuffer.set(sourceBuffer.subarray(rpos), pos);
 }
   
@@ -149,10 +149,10 @@ export function saveCanvas(canvas, filename, jsonData) {
 
 export async function copyCanvasToClipboard(canvas) {
   try {
-    // CanvasをBlobとして取得する
+    // Canvas打开Blob获得
     const blob = await new Promise((resolve) => canvas.toBlob(resolve));
 
-    // BlobをClipboardItemとしてクリップボードに書き込む
+    // Blob打开ClipboardItem克里普沃ー记录
     await navigator.clipboard.write([
       new ClipboardItem({
         [blob.type]: blob,
@@ -172,7 +172,7 @@ export function imageToBase64(imgElement) {
     canvas.getContext("2d").drawImage(imgElement, 0, 0);
 
     let base64Image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    console.log(base64Image); // base64エンコードされた画像データ    
+    console.log(base64Image); // base64恩科ー已删除的画像ー数据    
     return base64Image;
 }
 

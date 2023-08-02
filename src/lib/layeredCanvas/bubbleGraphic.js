@@ -147,7 +147,7 @@ function drawStrokesBubbleAux(context, seed, size, opts, double) {
       const [q0, q1] = extendLineSegment(p0, p1, opts.overRun);
 
       const gradient = context.createLinearGradient(...q0, ...q1);
-      const color0 = new paper.Color(color); // わざとstrokeStyleを使う
+      const color0 = new paper.Color(color); // 故意strokeStyle使用
       const color1 = new paper.Color(color);
       color0.alpha = 0;
       gradient.addColorStop(0, color2string(color0));
@@ -197,12 +197,12 @@ function drawMotionLinesBubble(context, seed, size, opts) {
     const icd = opts?.focalPoint ?? [0, 0];
     const rangeVector = opts?.focalRange ?? [0, Math.hypot(w/2, h/2) * 0.25];
     const range = Math.hypot(rangeVector[0], rangeVector[1]);
-    const [ox, oy, od] = [0, 0, Math.hypot(w/2, h/2)]; // 外円
-    const [ix, iy, id] = [icd[0], icd[1], range]; // 内円
+    const [ox, oy, od] = [0, 0, Math.hypot(w/2, h/2)]; // 外圆
+    const [ix, iy, id] = [icd[0], icd[1], range]; // 内圆
 
-    // グラデーション
+    // 渐变ー洗礼
     const gradient = context.createRadialGradient(ix, iy, id, ox, oy, od);
-    const color0 = new paper.Color(context.strokeStyle); // わざとstrokeStyleを使う
+    const color0 = new paper.Color(context.strokeStyle); // 故意strokeStyle使用
     const color1 = new paper.Color(context.strokeStyle);
     color0.alpha = 0;
     gradient.addColorStop(0.0, color2string(color0));
@@ -210,7 +210,7 @@ function drawMotionLinesBubble(context, seed, size, opts) {
     gradient.addColorStop(1.0, color2string(color1));
     context.fillStyle = gradient;
 
-    // 線を描く
+    // 画线
     for (let i = 0; i < n; i++) {
       const angle = (i * 2 * Math.PI) / n + (rng() - 0.5) * opts.angleJitter;
       const [dx, dy] = [Math.cos(angle), Math.sin(angle)];
@@ -269,15 +269,15 @@ function drawSpeedLinesBubble(context, seed, size, opts) {
     const psf0 = clamp(0.5 - magnitude2D(tailTip) / length);
     const psf1 = calculateNormalizedPosition(tailMid);
 
-    // 線を描く
+    // 画线
     for (let i = 0; i < n; i++) {
       const y = (i + 0.5) / n * length - length/2 + rng() * length * opts.laneJitter;
       const lx = - length * 0.5 + (rng() - 0.5) * w * opts.startJitter;
       const lw = h * opts.lineWidth * 0.01 * (rng() + 0.5);
 
-      // グラデーション
+      // 渐变ー洗礼
       const gradient = context.createLinearGradient(lx+length, y, lx, y);
-      const color0 = new paper.Color(context.strokeStyle); // わざとstrokeStyleを使う
+      const color0 = new paper.Color(context.strokeStyle); // 故意strokeStyle使用
       const color1 = new paper.Color(context.strokeStyle);
       color0.alpha = 0;
       gradient.addColorStop(psf0, color2string(color0));

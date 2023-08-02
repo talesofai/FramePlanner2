@@ -43,7 +43,7 @@
     on:clickAway={() => ($shapeChooserOpen = false)}
   >
     <div class="drawer-content">
-      ctrlキーを押しながらクリックで閉じずに選択
+      ctrl基数ー按钮选择而不关闭
       {#each shapes as s}
         <BubbleSample
           width={paperWidth}

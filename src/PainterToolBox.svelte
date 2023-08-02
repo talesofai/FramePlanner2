@@ -22,7 +22,7 @@
     console.log(e.detail);
     tools = tools.map(tool => ({ ...tool, selected: false }));
 
-// 選択されたツールの選択状態を更新
+// 选定的表格ー更新选中状态
     const chosenTool = tools.find(tool => tool.id === e.detail.id);
     chosenTool.selected = true;
 
@@ -54,7 +54,7 @@
   <div class="title-bar variant-filled-surface rounded-container-token expand"></div>
   <div class="inner expand hbox gap-0.5">
     {#each tools as tool}
-    <!-- いまのところtoolにはbrushしかない -->
+    <!-- 目前tool在…之前brush只有，只好 -->
     <PainterTool brush={tool} label={tool.name} on:choose={onChoose} on:change={onChange}/>
     {/each}
     <span style="width:20px;"></span>

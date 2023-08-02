@@ -1,5 +1,5 @@
 export const frameExamples = [
-  { // オーソドックス
+  { // Oー索德克斯
     bgColor: "white",
     height: 100,
     row: [
@@ -27,7 +27,7 @@ export const frameExamples = [
       },
     ],
   },
-  { // 一コマ
+  { // 一帧
     bgColor: "white",
     height: 100,
     row: [
@@ -49,7 +49,7 @@ export const frameExamples = [
       { width: 3, visibility: 0  },
     ]
   },
-  { // 一コマ(マージンなし)
+  { // 一帧(标记ー无镇)
     bgColor: "white",
     height: 100,
     column: [
@@ -59,7 +59,7 @@ export const frameExamples = [
       },
     ],
   },
-  { // 4コマ
+  { // 4陀螺
     bgColor: "white",
     height: 100,
     column: [
@@ -103,7 +103,7 @@ export const frameExamples = [
       { height: 4, visibility: 0  },
     ]
   },
-  { // 4コマ2段
+  { // 4陀螺2台阶
     bgColor: "white",
     height: 100,
     column: [
@@ -177,7 +177,7 @@ export const frameExamples = [
       { height: 4, visibility: 0  },
     ]
   },
-  { // オーソドックス2
+  { // Oー索德克斯2
     height: 100,
     bgColor: "white",
     row: [
